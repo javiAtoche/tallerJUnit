@@ -6,7 +6,24 @@ import java.util.List;
 public class CarritoCompraService {
 	
 	List<Articulo> articulos = new ArrayList<Articulo>();
+	BaseDeDatosService bbddService = null;
 	
+	
+	
+	/**
+	 * @return the bbddService
+	 */
+	public BaseDeDatosService getBbddService() {
+		return bbddService;
+	}
+
+	/**
+	 * @param bbddService the bbddService to set
+	 */
+	public void setBbddService(BaseDeDatosService bbddService) {
+		this.bbddService = bbddService;
+	}
+
 	public void limpiarCesta(){
 		articulos = new ArrayList<Articulo>();
 	}
@@ -39,5 +56,21 @@ public class CarritoCompraService {
 	}
 	
 	
+	/*
+	 * Ejercicio1:
+	 * Definir el comportamiento de la llamada al servicio BaseDeDatosService al buscar 
+	 * el articulo con ID 1
+	 */
+	public Double calculaDescuentoBBDD(int id,Double descuento) {
+		
+		Double precioDescuento = 0d;
+		
+		//Recupera el articulo de la "BBDD"
+		Articulo a1 = bbddService.findArticuloById(id);
+		precioDescuento = CarritoCompraService.calculadorDescuento(a1.getPrecio(), descuento);
+		
+		return precioDescuento;
+		
+	}
 
 }
